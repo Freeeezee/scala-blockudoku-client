@@ -1,7 +1,6 @@
 import {getGameState} from "./services/game.service";
-import $ from "jquery";
-import {gridHtml} from "./views/grid.view";
-import {elementHtml} from "./views/element.view";
+import {updateGrid} from "./views/grid.view";
+import {updateElement} from "./renderers/element.renderer";
 
 export const main = async () => {
     const gameState = await getGameState();
@@ -11,9 +10,9 @@ export const main = async () => {
         return;
     }
 
-    $('#grid-container').html(gridHtml());
+    updateGrid();
 
     for (let i = 0; i < 3; i++) {
-        $(`#element-${i}`).html(elementHtml(gameState.elements[i]));
+        updateElement(i, gameState.elements[i]);
     }
 }
