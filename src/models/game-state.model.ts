@@ -1,7 +1,9 @@
 import {ElementModel} from "./element.model";
 import {ElementTileGroupModel} from "./element-tile-group.model";
+import {GridModel} from "./grid.model";
 
 export interface GameStateModel {
+    grid: GridModel;
     elements: ElementModel[];
     score: number;
     colorIndex: number;
