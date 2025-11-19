@@ -1,9 +1,5 @@
-import './styles/main.less';
-import $ from 'jquery';
 import './scss/styles.scss';
-import {gridHtml} from "./views/grid-view";
-import {getGameState} from "./services/game.service";
+import './styles/main.less';
+import {main} from "./main";
 
-$('#grid-container').html(gridHtml());
-
-getGameState();
+main();
