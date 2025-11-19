@@ -9,5 +9,5 @@ export const refresh = async () => {
         return;
     }
 
-    AppState.update(gameState);
+    AppState.updateGameState(gameState);
 }

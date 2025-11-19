@@ -1,5 +1,6 @@
 import {ElementModel} from "../models/element.model";
 import '../scss/styles.scss';
+import AppState from "../app-state";
 
 export const getElementDimensions = (element: ElementModel) => {
     const xMin = Math.min(...element.structure.map(element => element.xPos));
@@ -16,4 +17,8 @@ export const hasPoint = (
     return element.structure.some(point => (
         point.xPos === x && point.yPos === y
     ));
+}
+
+export const handleElementClick = (index: number) => {
+    AppState.setSelectedElement(index);
 }

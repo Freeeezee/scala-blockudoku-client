@@ -1,12 +1,34 @@
 import {ElementModel} from "../models/element.model";
-import {elementHtml} from "../views/element.view";
-import $ from "jquery";
-import AppState from "../app-state";
+import {getElementDimensions, hasPoint} from "../utils/element.util";
 
-export const updateElement = (index: number) => {
-    const element = AppState.getGameState().elements[index];
+export const elementHtml = (elementModel: ElementModel) => {
+    const { xMin, xMax, yMin, yMax } = getElementDimensions(elementModel);
 
-    const html = elementHtml(element);
+    let html = "";
 
-    $(`#element-${index}`).html(html);
+    html += `<div class="container element" role="button" data-index="${elementModel.slot}">`;
+
+    for (let y = yMax; y >= yMin; y--) {
+        html += `<div class="row g-0">`;
+
+        for (let x = xMin; x <= xMax; x++) {
+            html += `<div class="col-auto tile-frames">`;
+
+            if (hasPoint(elementModel, x, y)) {
+                html += `
+                  <div class="tile">
+                    <img src="/images/block_blue1.png" class="tile-background-image" loading="lazy">
+                  </div>
+                `;
+            }
+
+            html += `</div>`;
+        }
+
+        html += `</div>`;
+    }
+
+    html += `</div>`;
+
+    return html;
 }

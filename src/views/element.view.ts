@@ -1,34 +1,23 @@
-import {ElementModel} from "../models/element.model";
-import {getElementDimensions, hasPoint} from "../utils/element.util";
+import AppState from "../app-state";
+import $ from "jquery";
+import {elementHtml} from "../renderers/element.renderer";
+import {extractIndex} from "../utils/event.util";
+import {handleElementClick} from "../utils/element.util";
 
-export const elementHtml = (elementModel: ElementModel) => {
-    const { xMin, xMax, yMin, yMax } = getElementDimensions(elementModel);
+export const updateElement = (index: number) => {
+    const element = AppState.getGameState().elements[index];
 
-    let html = "";
+    const html = elementHtml(element);
 
-    html += `<div class="container" role="button">`;
+    $(`#element-${index}`).html(html);
 
-    for (let y = yMax; y >= yMin; y--) {
-        html += `<div class="row g-0">`;
+    registerEventHandlers();
+}
 
-        for (let x = xMin; x <= xMax; x++) {
-            html += `<div class="col-auto tile-frames">`;
+const registerEventHandlers = () => {
+    $(`.element`).on('click', (e) => {
+        const index = extractIndex(e);
 
-            if (hasPoint(elementModel, x, y)) {
-                html += `
-                  <div class="tile">
-                    <img src="/images/block_blue1.png" class="tile-background-image" loading="lazy">
-                  </div>
-                `;
-            }
-
-            html += `</div>`;
-        }
-
-        html += `</div>`;
-    }
-
-    html += `</div>`;
-
-    return html;
+        handleElementClick(index);
+    })
 }

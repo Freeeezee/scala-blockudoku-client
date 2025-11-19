@@ -1,6 +1,7 @@
 import {GridModel} from "../models/grid.model";
 import {placeElement} from "../services/game.service";
 import {refresh} from "./state.util";
+import AppState from "../app-state";
 
 export const getTile = (grid: GridModel, x: number, y: number) => {
     const tileIndex = y * grid.xLength + x;
@@ -9,7 +10,12 @@ export const getTile = (grid: GridModel, x: number, y: number) => {
 }
 
 export const handleTileClick = async (index: number) => {
-    await placeElement(0, index);
+    if (AppState.isInSelectionMode()) {
+        return;
+    }
+
+    await placeElement(AppState.getSelectedElementIndex()!, index);
+    AppState.clearSelectedElement();
 
     await refresh();
 }

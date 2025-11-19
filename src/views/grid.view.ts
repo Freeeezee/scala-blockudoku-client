@@ -1,6 +1,6 @@
 import $ from "jquery";
 import {gridHtml} from "../renderers/grid.renderer";
-import {extractTileIndex} from "../utils/event.util";
+import {extractIndex} from "../utils/event.util";
 import {handleTileClick} from "../utils/tile.util";
 import AppState from "../app-state";
 
@@ -14,7 +14,7 @@ export const updateGrid = () => {
 
 const registerEventHandlers = () => {
     $('.tile').on('click', (e) => {
-        const index = extractTileIndex(e);
+        const index = extractIndex(e);
         void handleTileClick(index);
     });
 }
