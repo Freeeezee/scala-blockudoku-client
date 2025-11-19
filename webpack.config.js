@@ -1,13 +1,21 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    mode: "production",
+    mode: "development",
     entry: './src/index.ts',
     plugins: [
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: './src/public', to: '' },
+            ],
+        }),
         new HtmlWebpackPlugin({
             title: 'Blockudoku',
-            template: './index.html',
+            template: './src/index.html',
+            favicon: './src/public/favicon.png'
         }),
     ],
     module: {
@@ -17,6 +25,55 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
+            {
+                test: /\.less$/i,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "less-loader",
+                ],
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
+            {
+                test: /\.html$/i,
+                loader: 'html-loader',
+            },
+            {
+                test: /\.(scss)$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    autoprefixer
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sassOptions: {
+                                silenceDeprecations: [
+                                    'color-functions',
+                                    'global-builtin',
+                                    'import'
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
         ],
     },
     resolve: {

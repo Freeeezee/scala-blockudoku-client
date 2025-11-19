@@ -1,4 +1,7 @@
-const msg: string = "Hello, TypeScript!";
-document.body.textContent = msg;
+import './styles/main.less';
+import $ from 'jquery';
+import './scss/styles.scss';
+import {gridHtml} from "./views/grid-view";
 
-console.log("Hello, TypeScript!", msg);
+$('#grid-container').html(gridHtml());
+
