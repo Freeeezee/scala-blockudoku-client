@@ -4,6 +4,7 @@ import {defaultGameState} from "./constants/default-game-state.constant";
 import {updateElement} from "./views/element.view";
 import {updatePreviewGrid} from "./views/preview-grid.view";
 import {ScoreAnimator} from "./views/score.view";
+import {updateSettingsMultiplayer} from "./views/settings-multiplayer.view";
 
 export default class AppState {
     private static gameState: GameStateModel = defaultGameState;
@@ -13,6 +14,7 @@ export default class AppState {
         ScoreAnimator.increaseTo();
         updateGrid();
         updatePreviewGrid();
+        updateSettingsMultiplayer();
 
         for (let i = 0; i < 3; i++) {
             updateElement(i);
