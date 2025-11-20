@@ -359,3 +359,62 @@ input[type="file"] {
 .main-tile {
   pointer-events: none;
 }
+
+.score-label {
+  font-weight: 800;
+  font-size: 28px;
+  font-family: "Audiowide", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: @primary-color;
+  position: relative;
+}
+
+.score-number {
+  font-weight: 800;
+  font-size: 28px;
+  font-family: "Audiowide", sans-serif;
+  position: relative;
+}
+
+.score-number.pop {
+  animation: scorePop 650ms cubic-bezier(.2,.9,.25,1);
+}
+
+@keyframes scorePop {
+  0% { transform: scale(1); }
+  20% { transform: scale(1.52); }
+  55% { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
+
+.score-number.shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  transform: skewX(-20deg);
+  background: linear-gradient(
+          90deg,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0.4),
+          rgba(255,255,255,0)
+  );
+  animation: shine 650ms ease;
+}
+
+@keyframes shine {
+  0% { left: -60%; }
+  50% { left: 20%; }
+  100% { left: 120%; }
+}
+
+#scoreConfetti {
+  position: absolute;
+  top: -30px;
+  right: -10px;
+  pointer-events: none;
+}

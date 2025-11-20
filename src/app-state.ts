@@ -3,12 +3,14 @@ import {updateGrid} from "./views/grid.view";
 import {defaultGameState} from "./constants/default-game-state.constant";
 import {updateElement} from "./views/element.view";
 import {updatePreviewGrid} from "./views/preview-grid.view";
+import {ScoreAnimator} from "./views/score.view";
 
 export default class AppState {
     private static gameState: GameStateModel = defaultGameState;
     private static selectedElementIndex: number | null = null;
 
     private static refreshViews() {
+        ScoreAnimator.increaseTo();
         updateGrid();
         updatePreviewGrid();
 

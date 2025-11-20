@@ -7,6 +7,7 @@ import {PreviewState} from "../models/preview-state.model";
 import {ElementTileGroupModel} from "../models/element-tile-group.model";
 import {TileStateModel} from "../models/tile-state.model";
 import {updatePreviewGrid} from "../views/preview-grid.view";
+import {ScoreAnimator} from "../views/score.view";
 
 export const getTile = (grid: GridModel, x: number, y: number) => {
     const tileIndex = y * grid.xLength + x;
