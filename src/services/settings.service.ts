@@ -1,9 +1,9 @@
-import $ from 'jquery';
+import {get} from "../utils/service.util";
 
 const API_URL = process.env.API_URL;
 
-export const downloadGameState = () => {
-    $.get(`/download`);
+export const downloadGameState = async () => {
+    await get(`/download`);
 }
 
 
