@@ -1,0 +1,6 @@
+import {Tooltip} from "bootstrap";
+
+export const initializeBootstrapTooltips = () => {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    Array.from(tooltipTriggerList).map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl));
+}
