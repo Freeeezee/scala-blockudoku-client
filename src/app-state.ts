@@ -26,6 +26,15 @@ export default class AppState {
         this.refreshViews();
     }
 
+    public static updateTheme(index: number) {
+        this.gameState = {
+            ...this.gameState,
+            colorIndex: index,
+        }
+
+        this.refreshViews();
+    }
+
     public static getSelectedElementIndex() {
         return this.selectedElementIndex;
     }

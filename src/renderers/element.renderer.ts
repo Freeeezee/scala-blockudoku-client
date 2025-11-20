@@ -1,7 +1,9 @@
 import {ElementModel} from "../models/element.model";
 import {getElementDimensions, hasPoint} from "../utils/element.util";
+import {getBlockUrl} from "../utils/render.util";
+import {TileStateModel} from "../models/tile-state.model";
 
-export const elementHtml = (elementModel: ElementModel) => {
+export const elementHtml = (elementModel: ElementModel, colorSchemeIndex: number) => {
     const { xMin, xMax, yMin, yMax } = getElementDimensions(elementModel);
 
     let html = "";
@@ -15,9 +17,11 @@ export const elementHtml = (elementModel: ElementModel) => {
             html += `<div class="col-auto tile-frames">`;
 
             if (hasPoint(elementModel, x, y)) {
+                const url = getBlockUrl(TileStateModel.BLOCKED, colorSchemeIndex, elementModel.colors);
+
                 html += `
                   <div class="tile">
-                    <img src="/images/block_blue1.png" class="tile-background-image" loading="lazy">
+                    <img src="${url}" class="tile-background-image" loading="lazy">
                   </div>
                 `;
             }

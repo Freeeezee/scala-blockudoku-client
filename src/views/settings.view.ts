@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import {downloadGameState, setColor} from "../services/settings.service";
+import {handleThemeChange} from "../utils/color.util";
 
 export const initSettingsHtml = () => {
     initDownloadBtn();
@@ -13,8 +14,8 @@ export const initDownloadBtn = () => {
 }
 
 export const initColorSettings = () => {
-    $('#btnRetro').on('click', (e) => {setColor(0)})
-    $('#btnTropical').on('click', (e) => {setColor(2)})
-    $('#btnAquatic').on('click', (e) => {setColor(1)})
-    $('#btnHellfire').on('click', (e) => {setColor(3)})
+    $('#btnRetro').on('click', () => handleThemeChange(0))
+    $('#btnTropical').on('click', () => handleThemeChange(2))
+    $('#btnAquatic').on('click', () => handleThemeChange(1))
+    $('#btnHellfire').on('click', () => handleThemeChange(3))
 }

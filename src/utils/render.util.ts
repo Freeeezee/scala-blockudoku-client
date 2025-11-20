@@ -1,10 +1,15 @@
 import {TileStateModel} from "../models/tile-state.model";
 import {PreviewState} from "../models/preview-state.model";
+import {ColorUrls} from "../constants/color-urls.constant";
 
-export const getBlockUrl = (tileState: TileStateModel) => {
+export const getBlockUrl = (
+    tileState: TileStateModel,
+    schemeIndex: number,
+    colorIndex: number
+) => {
     switch (tileState) {
         case TileStateModel.BLOCKED:
-            return '/images/block_blue1.png';
+            return ColorUrls[schemeIndex][colorIndex];
         default:
             return '/images/background_block_final.png';
     }

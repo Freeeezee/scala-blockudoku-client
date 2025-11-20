@@ -8,6 +8,5 @@ export const downloadGameState = () => {
 
 
 export const setColor = (colorIndex: number) => {
-    // TODO: Exchange all tiles on the grid
-    navigator.sendBeacon(`${API_URL}/color/${colorIndex}`);
+    navigator.sendBeacon(`${API_URL}/update/color/${colorIndex}`);
 }

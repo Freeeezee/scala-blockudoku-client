@@ -2,7 +2,7 @@ import {GridModel} from "../models/grid.model";
 import {getTile} from "../utils/tile.util";
 import {getBlockUrl} from "../utils/render.util";
 
-export const gridHtml = (grid: GridModel) => {
+export const gridHtml = (grid: GridModel, colorSchemeIndex: number) => {
     const xLength = grid.xLength;
     const yLength = grid.yLength;
 
@@ -12,10 +12,12 @@ export const gridHtml = (grid: GridModel) => {
         for (let x = 0; x < xLength; x++) {
             const tile = getTile(grid, x, y);
 
+            const url = getBlockUrl(tile.state.state, colorSchemeIndex, tile.colors);
+
             html += `
                 <div class="col-auto">
                   <div class="tile main-tile" data-index="${tile.index}">
-                    <img src="${getBlockUrl(tile.state.state)}" class="tile-background-image" loading="lazy">
+                    <img src="${url}" class="tile-background-image" loading="lazy">
                   </div>
                 </div>
           `;
