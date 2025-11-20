@@ -13,11 +13,6 @@ const instance = axios.create({
     withCredentials: true,
 });
 
-instance.interceptors.request.use((config) => {
-    console.log('calling endpoint ', config.url);
-    return config;
-})
-
 export const get = async <T> (url: string): Promise<T | null> => {
     const response = await instance.get<T>(url);
 
