@@ -2,6 +2,7 @@ import {GameStateModel} from "./models/game-state.model";
 import {updateGrid} from "./views/grid.view";
 import {defaultGameState} from "./constants/default-game-state.constant";
 import {updateElement} from "./views/element.view";
+import {updatePreviewGrid} from "./views/preview-grid.view";
 
 export default class AppState {
     private static gameState: GameStateModel = defaultGameState;
@@ -9,6 +10,7 @@ export default class AppState {
 
     private static refreshViews() {
         updateGrid();
+        updatePreviewGrid();
 
         for (let i = 0; i < 3; i++) {
             updateElement(i);

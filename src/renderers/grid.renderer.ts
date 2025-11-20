@@ -3,8 +3,8 @@ import {getTile} from "../utils/tile.util";
 import {getBlockUrl} from "../utils/render.util";
 
 export const gridHtml = (grid: GridModel) => {
-    const xLength = 9;
-    const yLength = 9;
+    const xLength = grid.xLength;
+    const yLength = grid.yLength;
 
     let html = '';
     for (let y = 0; y < yLength; y++) {
@@ -14,7 +14,7 @@ export const gridHtml = (grid: GridModel) => {
 
             html += `
                 <div class="col-auto">
-                  <div class="tile" data-index="${tile.index}">
+                  <div class="tile main-tile" data-index="${tile.index}">
                     <img src="${getBlockUrl(tile.state.state)}" class="tile-background-image" loading="lazy">
                   </div>
                 </div>
