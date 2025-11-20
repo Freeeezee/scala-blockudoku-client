@@ -8,4 +8,5 @@ export interface GameStateModel {
     score: number;
     colorIndex: number;
     universalGridPreview: UniversalGridPreviewModel;
+    sessionId: string;
 }

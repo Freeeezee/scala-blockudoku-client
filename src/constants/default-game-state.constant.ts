@@ -16,5 +16,6 @@ export const defaultGameState: GameStateModel = {
             1: defaultElementTileGroup,
             2: defaultElementTileGroup,
         }
-    }
+    },
+    sessionId: '',
 }

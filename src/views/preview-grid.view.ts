@@ -20,6 +20,7 @@ const registerEventHandlers = () => {
 
     previewTiles.on('click', (e) => {
         const index = extractIndex(e);
+
         void handleTileClick(index);
     });
 
