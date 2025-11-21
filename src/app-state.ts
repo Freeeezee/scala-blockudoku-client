@@ -5,10 +5,13 @@ import {updateElement} from "./views/element.view";
 import {updatePreviewGrid} from "./views/preview-grid.view";
 import {ScoreAnimator} from "./views/score.view";
 import {updateSettingsMultiplayer} from "./views/settings-multiplayer.view";
+import {Socket} from "socket.io-client";
+import {joinRoom, setupSockets} from "./utils/socket.util";
 
 export default class AppState {
     private static gameState: GameStateModel = defaultGameState;
     private static selectedElementIndex: number | null = null;
+    private static socket: Socket = setupSockets();
 
     private static refreshViews() {
         ScoreAnimator.increaseTo();
@@ -28,6 +31,7 @@ export default class AppState {
     public static updateGameState(gameState: GameStateModel) {
         this.gameState = gameState;
         this.refreshViews();
+        joinRoom(this.socket);
     }
 
     public static updateTheme(index: number) {
