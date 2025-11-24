@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const webpack = require('webpack');
 
 module.exports = {
     mode: "development",
@@ -19,7 +18,9 @@ module.exports = {
             template: './src/index.html',
             favicon: './src/public/favicon.png'
         }),
-        new Dotenv(),
+        new Dotenv({
+            systemvars: true
+        }),
     ],
     module: {
         rules: [
