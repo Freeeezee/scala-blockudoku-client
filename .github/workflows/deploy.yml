@@ -1,0 +1,43 @@
+name: Deploy
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: |
+          IMAGE_TAG=${GITHUB_REF#refs/tags/}
+          IMAGE_TAG=${IMAGE_TAG#v}
+          docker build -t freeeezee/blockudoku-client:$IMAGE_TAG \
+                       -t freeeezee/blockudoku-client:latest .
+
+      - name: Push Docker image
+        run: |
+          IMAGE_TAG=${GITHUB_REF#refs/tags/}
+          IMAGE_TAG=${IMAGE_TAG#v}
+          docker push freeeezee/blockudoku-client:$IMAGE_TAG
+          docker push freeeezee/blockudoku-client:latest
+
+      - name: Deploy to droplet
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DROPLET_HOST }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          port: 22
+          script: ./blockudoku/restart.sh
