@@ -1,4 +1,10 @@
+ARG API_URL=https://blockudoku-api.tomberger.io
+ARG SOCKETS_URL=https://blockudoku-socket-service.tomberger.io
+
 FROM node:20-alpine AS build
+
+ENV API_URL=$API_URL
+ENV SOCKETS_URL=$SOCKETS_URL
 
 WORKDIR /app
 COPY package*.json ./
