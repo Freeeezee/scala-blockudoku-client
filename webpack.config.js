@@ -89,6 +89,6 @@ module.exports = {
     },
     devServer: {
         static: "./dist",
-        server: 'https'
+        server: 'http'
     }
 };

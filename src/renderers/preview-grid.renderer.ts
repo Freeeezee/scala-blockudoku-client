@@ -12,7 +12,7 @@ export const previewGridHtml = (
     const xLength = preview.xLength;
     const yLength = preview.yLength;
 
-    const elementTileGroup = selectedElementIndex !== null ? preview.elementTileGroups[selectedElementIndex] : null;
+    const elementTileGroup = selectedElementIndex === null ? null : preview.elementTileGroups[selectedElementIndex];
 
     let html = '';
     for (let y = 0; y < yLength; y++) {

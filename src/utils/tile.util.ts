@@ -7,7 +7,8 @@ import {PreviewState} from "../models/preview-state.model";
 import {ElementTileGroupModel} from "../models/element-tile-group.model";
 import {TileStateModel} from "../models/tile-state.model";
 import {updatePreviewGrid} from "../views/preview-grid.view";
-import {ScoreAnimator} from "../views/score.view";
+import {publishDataToPeers} from "./rtc.util";
+import {MouseGridPosition, mouseGridPositionType} from "../models/rtc-models.model";
 
 export const getTile = (grid: GridModel, x: number, y: number) => {
     const tileIndex = y * grid.xLength + x;
@@ -47,11 +48,20 @@ export const handleTileClick = async (index: number) => {
 export const handleTileMouseEnter = (index: number, hoverTileIndex: number) => {
     if (index !== hoverTileIndex) {
         updatePreviewGrid(index);
+        publishMouseEnter(index);
     }
 }
 
 export const handleTileMouseLeave = (index: number, hoverTileIndex: number) => {
     if (index === hoverTileIndex) {
         updatePreviewGrid();
+        publishMouseEnter(null);
     }
+}
+
+export const publishMouseEnter = (index: number | null) => {
+    const msg: MouseGridPosition = {
+        hoverTileIndex: index
+    }
+    publishDataToPeers({ type: mouseGridPositionType, payload: msg })
 }

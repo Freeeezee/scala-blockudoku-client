@@ -18,7 +18,17 @@ export const updateSettingsMultiplayer = () => {
     copyLinkButton.on('click', async (e) => {
         e.preventDefault();
 
-        await navigator.clipboard.writeText(url);
+        if (!window.isSecureContext) {
+            alert("This page is not in a secure context. Clipboard access denied.");
+            return;
+        } else {
+            console.log("This page is in a secure context. Clipboard access granted.");
+        }
+        try {
+            await navigator.clipboard.writeText(url);
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
 
         updateTooltip('Copied!', tooltip);
 
