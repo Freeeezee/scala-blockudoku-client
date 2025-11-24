@@ -2,13 +2,20 @@ import {ElementModel} from "../models/element.model";
 import {getElementDimensions, hasPoint} from "../utils/element.util";
 import {getBlockUrl} from "../utils/render.util";
 import {TileStateModel} from "../models/tile-state.model";
+import AppState from "../app-state";
 
-export const elementHtml = (elementModel: ElementModel, colorSchemeIndex: number) => {
+export const elementHtml = (
+    elementModel: ElementModel,
+    colorSchemeIndex: number,
+    isSelected: boolean,
+) => {
     const { xMin, xMax, yMin, yMax } = getElementDimensions(elementModel);
+
+    const selectedClass = isSelected ? "selected-element" : "";
 
     let html = "";
 
-    html += `<div class="container element" role="button" data-index="${elementModel.slot}">`;
+    html += `<div class="container element ${selectedClass}" role="button" data-index="${elementModel.slot}">`;
 
     for (let y = yMax; y >= yMin; y--) {
         html += `<div class="row g-0">`;

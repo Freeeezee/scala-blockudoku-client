@@ -53,6 +53,10 @@ export default class AppState {
 
     public static setSelectedElement(index: number) {
         this.selectedElementIndex = index;
+
+        for (let i = 0; i < 3; i++) {
+            updateElement(i);
+        }
     }
 
     public static clearSelectedElement() {
