@@ -11,10 +11,13 @@ import {joinRoom, setupSockets} from "./utils/socket.util";
 export default class AppState {
     private static gameState: GameStateModel = defaultGameState;
     private static selectedElementIndex: number | null = null;
-    private static socket: Socket = setupSockets();
+    private static readonly socket: Socket = setupSockets();
+    public static readonly peers: Record<string, RTCPeerConnection> = {};
+    public static readonly channels: Record<string, RTCDataChannel> = {};
 
     private static refreshViews() {
         ScoreAnimator.increaseTo();
+        this.clearSelectedElement()
         updateGrid();
         updatePreviewGrid();
         updateSettingsMultiplayer();
@@ -29,9 +32,11 @@ export default class AppState {
     }
 
     public static updateGameState(gameState: GameStateModel) {
+        if(this.gameState.sessionId !== gameState.sessionId) {
+            joinRoom(this.socket, gameState.sessionId);
+        }
         this.gameState = gameState;
         this.refreshViews();
-        joinRoom(this.socket);
     }
 
     public static updateTheme(index: number) {
@@ -39,7 +44,6 @@ export default class AppState {
             ...this.gameState,
             colorIndex: index,
         }
-
         this.refreshViews();
     }
 
