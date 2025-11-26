@@ -10,6 +10,8 @@ export default class AppState {
     private static gameState: GameStateModel = defaultGameState;
     private static selectedElementIndex: number | null = null;
 
+    public static socket: WebSocket | null = null;
+
     private static refreshViews() {
         ScoreAnimator.increaseTo();
         updateGrid();
