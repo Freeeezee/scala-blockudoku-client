@@ -3,7 +3,6 @@ import {updateGrid} from "./views/grid.view";
 import {defaultGameState} from "./constants/default-game-state.constant";
 import {updateElement} from "./views/element.view";
 import {updatePreviewGrid} from "./views/preview-grid.view";
-import {ScoreAnimator} from "./views/score.view";
 import {updateSettingsMultiplayer} from "./views/settings-multiplayer.view";
 import {Socket} from "socket.io-client";
 import {joinRoom, setupSockets} from "./utils/socket.util";
@@ -16,7 +15,7 @@ export default class AppState {
     public static readonly channels: Record<string, RTCDataChannel> = {};
 
     private static refreshViews() {
-        ScoreAnimator.increaseTo();
+        //ScoreAnimator.increaseTo();
         this.clearSelectedElement()
         updateGrid();
         updatePreviewGrid();

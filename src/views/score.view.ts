@@ -1,3 +1,4 @@
+/*
 import AppState from "../app-state";
 import $ from "jquery";
 
@@ -40,7 +41,7 @@ export class ScoreAnimator {
         this.currentValue = newValue;
     }
 
-    /** Smooth count-up animation */
+    /!** Smooth count-up animation *!/
     private static animateCount(from: number, to: number): void {
         const duration = ScoreAnimator.duration;
         const start = performance.now();
@@ -59,13 +60,13 @@ export class ScoreAnimator {
         requestAnimationFrame(step);
     }
 
-    /** Trigger CSS pop animation */
+    /!** Trigger CSS pop animation *!/
     private static triggerPop(): void {
         this.$value.addClass("pop");
         setTimeout(() => this.$value.removeClass("pop"), 900);
     }
 
-    /** Trigger shimmer animation */
+    /!** Trigger shimmer animation *!/
     private  static triggerShimmer(): void {
         this.$value.addClass("shimmer");
         setTimeout(() => this.$value.removeClass("shimmer"), 500);
@@ -86,7 +87,7 @@ export class ScoreAnimator {
         ctx.scale(DPR, DPR);
     }
 
-    /** Confetti burst animation */
+    /!** Confetti burst animation *!/
     public static runConfetti(intensity: number = 1): void {
         this.prepareCanvas();
         if (!this.ctx) return;
@@ -142,4 +143,4 @@ export class ScoreAnimator {
 
         requestAnimationFrame(frame);
     }
-}
+}*/

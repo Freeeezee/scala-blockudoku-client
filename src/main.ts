@@ -3,18 +3,15 @@ import {initSettingsHtml} from "./views/settings.view";
 import {handleQueryParams} from "./utils/query-params.util";
 import {initializeBootstrapTooltips} from "./utils/bootstrap.util";
 import {createApp} from 'vue';
+import {initializeApp} from "./utils/app.util";
 
 export const main = async () => {
-    const app = createApp({
-        data() {
-            return { score: -1 };
-        }
-    });
-    app.mount('#scoreText');
-    await handleQueryParams();
+    initializeApp();
+
+    //await handleQueryParams();
 
     initializeBootstrapTooltips();
-    initSettingsHtml();
+    //initSettingsHtml();
 
-    await refresh();
+    //await refresh();
 }

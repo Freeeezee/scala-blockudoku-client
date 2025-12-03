@@ -5,7 +5,7 @@ import {extractIndex} from "../utils/event.util";
 import {handleElementClick} from "../utils/element.util";
 
 export const updateElement = (index: number) => {
-    const element = AppState.getGameState().elements[index];
+    const element = AppState.getGameState().elements![index];
     const colorSchemeIndex = AppState.getGameState().colorIndex;
     const isSelected = index === AppState.getSelectedElementIndex();
 
