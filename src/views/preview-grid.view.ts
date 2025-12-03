@@ -9,7 +9,7 @@ export const updatePreviewGrid = (hoverTileIndex?: number) => {
     const grid = AppState.getGameState().grid;
     const selectedElementIndex = AppState.getSelectedElementIndex();
 
-    const html = previewGridHtml(preview, grid, selectedElementIndex, hoverTileIndex);
+    const html = previewGridHtml(preview, grid!, selectedElementIndex, hoverTileIndex);
     $('#preview-grid-container').html(html);
 
     registerEventHandlers();

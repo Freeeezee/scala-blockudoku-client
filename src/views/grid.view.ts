@@ -6,5 +6,5 @@ export const updateGrid = () => {
     const grid = AppState.getGameState().grid;
     const colorSchemeIndex = AppState.getGameState().colorIndex;
 
-    $('#grid-container').html(gridHtml(grid, colorSchemeIndex));
+    $('#grid-container').html(gridHtml(grid!, colorSchemeIndex));
 }
