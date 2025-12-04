@@ -2,6 +2,7 @@ import {inject, InjectionKey, provide, Ref, ref} from "vue";
 import {GameStateModel} from "../models/game-state.model";
 import {defaultGameState} from "../constants/default-game-state.constant";
 import {getGameState} from "../services/game.service";
+import {joinRoomSocketOnly, setupSocketsOnly} from "../utils/socket.util";
 
 interface AppContextValue {
     gameState: Ref<GameStateModel>;
@@ -29,6 +30,16 @@ export const provideAppContext = () => {
     const selectedElementIndex: Ref<number | null> = ref(null);
     const hoverTileIndex: Ref<number | null> = ref(null);
 
+    const updateState = (newState: GameStateModel) => {
+        if (gameState.value.sessionId !== newState.sessionId) {
+            joinRoomSocketOnly(socket, newState.sessionId);
+        }
+
+        gameState.value = newState;
+    }
+
+    const socket = setupSocketsOnly(updateState);
+
     const setSelectedElementIndex = (index: number | null) => {
         selectedElementIndex.value = index;
     }
@@ -41,7 +52,7 @@ export const provideAppContext = () => {
             return;
         }
 
-        gameState.value = newState;
+        updateState(newState);
     }
 
     const updateTheme = (index: number) => {

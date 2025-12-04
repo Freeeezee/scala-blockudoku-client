@@ -10,7 +10,7 @@ import {joinRoom, setupSockets} from "./utils/socket.util";
 export default class AppState {
     private static gameState: GameStateModel = defaultGameState;
     private static selectedElementIndex: number | null = null;
-    private static readonly socket: Socket = setupSockets();
+    private static readonly socket: Socket = null!;
     public static readonly peers: Record<string, RTCPeerConnection> = {};
     public static readonly channels: Record<string, RTCDataChannel> = {};
 
