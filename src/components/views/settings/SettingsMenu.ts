@@ -1,4 +1,19 @@
+import {setColor} from "../../../services/settings.service";
+import {injectAppContext} from "../../../contexts/app.context";
+
 export default {
+    setup() {
+        const app = injectAppContext();
+
+        const handleThemeClick = (index: number) => {
+            setColor(index);
+            app.gameState.value.colorIndex = index;
+        }
+
+        return {
+            handleThemeClick,
+        }
+    },
     template: `
     <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -44,10 +59,10 @@ export default {
                                     Change Color Scheme
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><button class="dropdown-item" id="btnAquatic">Aquatic</button></li>
-                                    <li><button class="dropdown-item" id="btnTropical">Tropical</button></li>
-                                    <li><button class="dropdown-item" id="btnHellfire">Hellfire</button></li>
-                                    <li><button class="dropdown-item" id="btnRetro">Retro</button></li>
+                                    <li><button class="dropdown-item" id="btnAquatic" @click="() => handleThemeClick(1)" >Aquatic</button></li>
+                                    <li><button class="dropdown-item" id="btnTropical" @click="() => handleThemeClick(2)" >Tropical</button></li>
+                                    <li><button class="dropdown-item" id="btnHellfire" @click="() => handleThemeClick(3)" >Hellfire</button></li>
+                                    <li><button class="dropdown-item" id="btnRetro" @click="() => handleThemeClick(0)" >Retro</button></li>
                                 </ul>
                             </div>
                             <p class="sub-title">Save and Load</p>

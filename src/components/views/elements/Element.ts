@@ -33,7 +33,7 @@ export default defineComponent({
         });
         const selectedClass = computed(() =>
             app.selectedElementIndex.value === props.index ? "selected-element" : "");
-        const colorSchemeIndex = app.gameState.value.colorIndex;
+        const colorSchemeIndex = computed(() => app.gameState.value.colorIndex);
 
         const handleClick = () => {
             app.setSelectedElementIndex(props.index);

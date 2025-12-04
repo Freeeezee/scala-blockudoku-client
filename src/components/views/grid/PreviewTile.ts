@@ -48,7 +48,7 @@ export default defineComponent({
         });
 
         const handleClick = async () => {
-            if (!app.selectedElementIndex.value) return;
+            if (app.selectedElementIndex.value === null) return;
 
             await placeElement(app.selectedElementIndex.value, tileInfo.value.index);
 

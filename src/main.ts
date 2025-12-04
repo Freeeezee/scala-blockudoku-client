@@ -8,7 +8,7 @@ import {initializeApp} from "./utils/app.util";
 export const main = async () => {
     initializeApp();
 
-    //await handleQueryParams();
+    await handleQueryParams();
 
     initializeBootstrapTooltips();
     //initSettingsHtml();
