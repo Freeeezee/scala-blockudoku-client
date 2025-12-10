@@ -19,7 +19,7 @@ export const getTile = (grid: GridModel, x: number, y: number) => {
 export const getPreviewState = (
     group: ElementTileGroupModel,
     tile: TileModel,
-    hoverTileIndex: number | undefined,
+    hoverTileIndex: number | null,
 ): PreviewState => {
     if (!hoverTileIndex) return 'none';
 

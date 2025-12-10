@@ -21,7 +21,7 @@ export const previewGridHtml = (
             const tile = getTile(grid, x, y);
 
             const previewState = elementTileGroup ?
-                getPreviewState(elementTileGroup, tile, hoverTileIndex) : 'none';
+                getPreviewState(elementTileGroup, tile, hoverTileIndex || null) : 'none';
 
             const url = getPreviewUrl(previewState);
 

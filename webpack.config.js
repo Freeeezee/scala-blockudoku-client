@@ -6,7 +6,7 @@ const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     mode: "development",
-    entry: './src/index.ts',
+    entry: './src/index.tsx',
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
