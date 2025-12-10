@@ -8,6 +8,7 @@
     "dev": "webpack serve --mode development"
   },
   "dependencies": {
+    "@fontsource/roboto": "^5.2.9",
     "@popperjs/core": "^2.11.8",
     "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
