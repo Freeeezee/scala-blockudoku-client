@@ -1,5 +1,5 @@
-<script setup>
-import AppContext from "./contexts/AppContext";
+<script setup lang="ts">
+import AppContext from "./contexts/AppContext.vue";
 import Main from "./views/Main.vue";
 </script>
 

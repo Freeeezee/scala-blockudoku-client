@@ -1,9 +1,9 @@
-<script setup>
-import Title from "./Title";
+<script setup lang="ts">
+import Title from "./Title.vue";
 import Score from "./Score.vue";
-import Grid from "./grid/Grid";
-import Settings from "./settings/Settings";
-import Elements from "./elements/Elements";
+import Grid from "./grid/Grid.vue";
+import Settings from "./settings/Settings.vue";
+import Elements from "./elements/Elements.vue";
 </script>
 
 <template>
