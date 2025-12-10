@@ -15,19 +15,16 @@ const handleThemeClick = (index: number) => {
 
 <template>
   <!-- Settings Button -->
-  <v-btn icon color="primary" @click="dialog = true">
-    <v-icon>mdi-cog</v-icon>
+  <v-btn icon color="#0099cc" @click="dialog = true" class="settings-btn">
+    <i class="bi bi-gear-fill fs-4"></i>
   </v-btn>
 
   <!-- Settings Modal -->
   <v-dialog v-model="dialog" max-width="600">
-    <v-card>
+    <v-card color="#2a2a4a" border="sm">
       <v-card-title class="text-h6">
         Settings
         <v-spacer></v-spacer>
-        <v-btn icon @click="dialog = false">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
       </v-card-title>
 
       <v-card-text>
@@ -36,16 +33,16 @@ const handleThemeClick = (index: number) => {
           <v-tab>About</v-tab>
         </v-tabs>
 
-        <v-tabs-items v-model="activeTab">
+        <v-tabs-window v-model="activeTab">
           <!-- Game Tab -->
-          <v-tab-item>
+          <v-tabs-window-item>
             <p class="sub-title">Multiplayer</p>
-            <v-btn color="primary" class="mb-2">Copy Link</v-btn>
+            <v-btn color="#0099cc" class="mb-2">Copy Link</v-btn>
 
             <p class="sub-title">Color Settings</p>
             <v-menu>
               <template #activator="{ props }">
-                <v-btn v-bind="props" color="primary" outlined>
+                <v-btn v-bind="props" color="#0099cc" outlined>
                   Change Color Scheme
                   <v-icon right>mdi-menu-down</v-icon>
                 </v-btn>
@@ -67,15 +64,15 @@ const handleThemeClick = (index: number) => {
             </v-menu>
 
             <p class="sub-title">Save and Load</p>
-            <v-btn color="primary" class="me-2">Save Game</v-btn>
-            <v-btn color="primary" outlined>
+            <v-btn color="#0099cc" class="me-2">Save Game</v-btn>
+            <v-btn color="#0099cc" outlined>
               Upload Game
               <input type="file" style="display:none;" />
             </v-btn>
-          </v-tab-item>
+          </v-tabs-window-item>
 
           <!-- About Tab -->
-          <v-tab-item>
+          <v-tabs-window-item>
             <p class="sub-title">About</p>
             <p>
               This is a clone of the mobile game
@@ -85,13 +82,13 @@ const handleThemeClick = (index: number) => {
               <br />
               This project is an academic project at HTWG Konstanz.
             </p>
-          </v-tab-item>
-        </v-tabs-items>
+          </v-tabs-window-item>
+        </v-tabs-window>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" @click="dialog = false">Close</v-btn>
+        <v-btn color="#0099cc" @click="dialog = false">Close</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
