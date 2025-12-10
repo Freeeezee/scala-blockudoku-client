@@ -1,0 +1,10 @@
+<script setup>
+import AppContext from "./contexts/AppContext";
+import Main from "./views/Main.vue";
+</script>
+
+<template>
+  <AppContext>
+    <Main/>
+  </AppContext>
+</template>

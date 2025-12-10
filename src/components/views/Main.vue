@@ -1,12 +1,12 @@
+<script setup>
 import Title from "./Title";
-import Score from "./Score";
+import Score from "./Score.vue";
 import Grid from "./grid/Grid";
 import Settings from "./settings/Settings";
 import Elements from "./elements/Elements";
+</script>
 
-export default {
-    components: {Elements, Settings, Grid, Score, Title},
-    template: `
+<template>
     <div id="main">
         <Title />
         <Score />
@@ -14,5 +14,4 @@ export default {
         <Elements />
         <Settings />
     </div>
-    `
-}
+</template>

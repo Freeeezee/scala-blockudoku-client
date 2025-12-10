@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
     mode: "development",
@@ -21,6 +22,7 @@ module.exports = {
         new Dotenv({
             systemvars: true
         }),
+        new VueLoaderPlugin()
     ],
     module: {
         rules: [
@@ -36,6 +38,10 @@ module.exports = {
                     "css-loader",
                     "less-loader",
                 ],
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -81,7 +87,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.js', '.vue'],
         alias: {
             vue: 'vue/dist/vue.esm-bundler.js'
         }

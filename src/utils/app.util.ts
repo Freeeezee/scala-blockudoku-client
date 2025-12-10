@@ -1,5 +1,5 @@
 import {createApp} from "vue";
-import App from "../components/App";
+import App from "../components/App.vue";
 
 export const initializeApp = () => {
     const app = createApp(App);
