@@ -7,11 +7,7 @@ import * as directives from 'vuetify/directives'
 
 
 export const initializeApp = () => {
-
-    const vuetify = createVuetify({
-        components,
-        directives,
-    })
+    const vuetify = createVuetify();
 
     createApp(App).use(vuetify).mount('#app')
 }

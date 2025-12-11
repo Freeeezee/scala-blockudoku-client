@@ -15,7 +15,8 @@
     "bootstrap-icons": "^1.13.1",
     "jquery": "^3.7.1",
     "socket.io-client": "^4.8.1",
-    "vuetify": "^3.11.3"
+    "vuetify": "^3.11.3",
+    "webpack-plugin-vuetify": "^3.1.2"
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.10",

@@ -4,6 +4,7 @@ const autoprefixer = require('autoprefixer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const { VueLoaderPlugin } = require('vue-loader');
+const {VuetifyPlugin} = require("webpack-plugin-vuetify");
 
 module.exports = {
     mode: "development",
@@ -22,7 +23,8 @@ module.exports = {
         new Dotenv({
             systemvars: true
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new VuetifyPlugin({ autoImport: true }),
     ],
     module: {
         rules: [
