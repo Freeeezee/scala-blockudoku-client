@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const { VueLoaderPlugin } = require('vue-loader');
 const {VuetifyPlugin} = require("webpack-plugin-vuetify");
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
     mode: "development",
@@ -25,6 +26,11 @@ module.exports = {
         }),
         new VueLoaderPlugin(),
         new VuetifyPlugin({ autoImport: true }),
+        new WorkboxPlugin.GenerateSW({
+            clientsClaim: true,
+            skipWaiting: true,
+            maximumFileSizeToCacheInBytes: 5000000
+        }),
     ],
     module: {
         rules: [
