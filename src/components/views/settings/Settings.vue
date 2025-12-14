@@ -62,6 +62,8 @@ const {
             </v-menu>
 
             <p class="sub-title">Difficulty</p>
+            <p class="mb-2"> Note: The change will take effect
+              <b> after </b> the next element placement.</p>
               <v-slider
                   v-model="numElements"
                   :max="9"
