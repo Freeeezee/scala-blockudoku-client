@@ -11,3 +11,7 @@ export const placeElement = async (elementIndex: number, tileIndex: number) => {
         positionIndex: tileIndex,
     });
 }
+
+export const resetGame = async () => {
+    return await get(`/reset`);
+}

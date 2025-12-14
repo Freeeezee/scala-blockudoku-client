@@ -9,7 +9,7 @@ const API_URL = process.env.API_URL;
 
 const instance = axios.create({
     baseURL: API_URL,
-    timeout: 10000,
+    timeout: 20000,
     withCredentials: true,
 });
 

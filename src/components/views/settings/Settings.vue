@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { setColor } from '../../../services/settings.service';
-import { injectAppContext } from '../../../contexts/app.context';
+import useSettings from "../../../composables/useSettings";
 
-const app = injectAppContext();
-const dialog = ref(false);
-const activeTab = ref(0);
+const {
+  dialog,
+  activeTab,
+  numElements,
+  handleThemeClick,
+  handleNumElementsChange,
+} = useSettings();
 
-const handleThemeClick = (index: number) => {
-  setColor(index);
-  app.gameState.value.colorIndex = index;
-};
 </script>
 
 <template>
@@ -62,6 +60,17 @@ const handleThemeClick = (index: number) => {
                 </v-list-item>
               </v-list>
             </v-menu>
+
+            <p class="sub-title">Difficulty</p>
+              <v-slider
+                  v-model="numElements"
+                  :max="9"
+                  :min="1"
+                  :step="1"
+                  thumb-label
+                  label="Number of Elements"
+                  @update:model-value="handleNumElementsChange"
+              ></v-slider>
 
             <p class="sub-title">Save and Load</p>
             <v-btn color="#0099cc" class="me-2">Save Game</v-btn>

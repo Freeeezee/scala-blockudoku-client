@@ -4,6 +4,7 @@ import Score from "./Score.vue";
 import Grid from "./grid/Grid.vue";
 import Settings from "./settings/Settings.vue";
 import Elements from "./elements/Elements.vue";
+import NewGameBtn from "./NewGameBtn.vue";
 </script>
 
 <template>
@@ -13,5 +14,6 @@ import Elements from "./elements/Elements.vue";
         <Grid />
         <Elements />
         <Settings />
+      <NewGameBtn />
     </div>
 </template>
