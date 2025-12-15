@@ -10,7 +10,3 @@ export const downloadGameState = async () => {
 export const setColor = (colorIndex: number) => {
     navigator.sendBeacon(`${API_URL}/update/color/${colorIndex}`);
 }
-
-export const setNumElements = (numElements: number) => {
-    navigator.sendBeacon(`${API_URL}/update/num-elements/${numElements}`);
-}

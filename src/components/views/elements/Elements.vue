@@ -5,7 +5,7 @@ import {computed} from "vue";
 
 const app = injectAppContext();
 
-const elements = computed(() => app.gameState.value.elements);
+const elements = computed(() => app.gameState.value.elements?.slice(0, app.numberOfElements.value));
 </script>
 
 <template>

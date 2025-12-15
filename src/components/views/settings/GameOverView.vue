@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import {useAnimatedScore} from "../../../composables/useAnimatedScore";
 import useNewGameBtn from "../../../composables/useNewGameBtn";
+import useGameOver from "../../../composables/useGameOver";
 
 const {
   canvas,
   displayedScore,
 } = useAnimatedScore();
 
-const {resetGameState, newGame} = useNewGameBtn()
+const { isGameOver } = useGameOver();
+const {resetGameState, newGame} = useNewGameBtn();
 
 </script>
 <template>
   <div class="game-over-overlay"
-  v-if="">
+  v-if="isGameOver">
     <v-card
         elevation="12"
         rounded="xl"

@@ -6,7 +6,6 @@ const {
   activeTab,
   numElements,
   handleThemeClick,
-  handleNumElementsChange,
 } = useSettings();
 
 </script>
@@ -71,7 +70,6 @@ const {
                   :step="1"
                   thumb-label
                   label="Number of Elements"
-                  @update:model-value="handleNumElementsChange"
               ></v-slider>
 
             <p class="sub-title">Save and Load</p>
