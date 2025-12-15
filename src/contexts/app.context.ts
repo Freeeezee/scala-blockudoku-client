@@ -8,9 +8,11 @@ interface AppContextValue {
     gameState: Ref<GameStateModel>;
     selectedElementIndex: Ref<number | null>;
     hoverTileIndex: Ref<number | null>;
+    numberOfElements: Ref<number>;
     setSelectedElementIndex: (index: number | null) => void;
     refreshState: () => Promise<void>;
     updateTheme: (index: number) => void;
+    isGameOver: Ref<boolean>;
 }
 
 const key = Symbol() as InjectionKey<AppContextValue>;
@@ -29,6 +31,8 @@ export const provideAppContext = () => {
     const gameState: Ref<GameStateModel> = ref(defaultGameState);
     const selectedElementIndex: Ref<number | null> = ref(null);
     const hoverTileIndex: Ref<number | null> = ref(null);
+    const numberOfElements: Ref<number> = ref(3);
+    const isGameOver: Ref<boolean> = ref(false);
 
     const updateState = (newState: GameStateModel) => {
         if (gameState.value.sessionId !== newState.sessionId) {
@@ -66,9 +70,11 @@ export const provideAppContext = () => {
         gameState,
         selectedElementIndex,
         hoverTileIndex,
+        numberOfElements,
         setSelectedElementIndex,
         refreshState,
         updateTheme,
+        isGameOver,
     }
 
     provide(key, context);

@@ -15,7 +15,6 @@ export default class AppState {
     public static readonly channels: Record<string, RTCDataChannel> = {};
 
     private static refreshViews() {
-        //ScoreAnimator.increaseTo();
         this.clearSelectedElement()
         updateGrid();
         updatePreviewGrid();
