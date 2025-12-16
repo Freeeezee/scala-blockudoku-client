@@ -7,13 +7,13 @@ const useNewGameBtn = () => {
 
     const resetGameState = async () => {
         await resetGame();
-        app.setSelectedElementIndex(null);
+        app.selectedElementIndex.value = null;
         void app.refreshState();
     }
 
     const newGame= async () => {
         await newSession();
-        app.setSelectedElementIndex(null);
+        app.selectedElementIndex.value = null;
         void app.refreshState();
     }
 

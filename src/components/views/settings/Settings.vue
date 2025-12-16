@@ -6,6 +6,7 @@ const {
   activeTab,
   numElements,
   handleThemeClick,
+  handleCopyMultiplayerClick
 } = useSettings();
 
 </script>
@@ -34,7 +35,7 @@ const {
           <!-- Game Tab -->
           <v-tabs-window-item>
             <p class="sub-title">Multiplayer</p>
-            <v-btn color="#0099cc" class="mb-2">Copy Link</v-btn>
+            <v-btn color="#0099cc" class="mb-2" @click="handleCopyMultiplayerClick">Copy Link</v-btn>
 
             <p class="sub-title">Color Settings</p>
             <v-menu>

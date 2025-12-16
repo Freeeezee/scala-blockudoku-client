@@ -5,14 +5,11 @@ import {updateElement} from "./views/element.view";
 import {updatePreviewGrid} from "./views/preview-grid.view";
 import {updateSettingsMultiplayer} from "./views/settings-multiplayer.view";
 import {Socket} from "socket.io-client";
-import {joinRoom, setupSockets} from "./utils/socket.util";
 
 export default class AppState {
     private static gameState: GameStateModel = defaultGameState;
     private static selectedElementIndex: number | null = null;
     private static readonly socket: Socket = null!;
-    public static readonly peers: Record<string, RTCPeerConnection> = {};
-    public static readonly channels: Record<string, RTCDataChannel> = {};
 
     private static refreshViews() {
         this.clearSelectedElement()
@@ -30,11 +27,7 @@ export default class AppState {
     }
 
     public static updateGameState(gameState: GameStateModel) {
-        if(this.gameState.sessionId !== gameState.sessionId) {
-            joinRoom(this.socket, gameState.sessionId);
-        }
-        this.gameState = gameState;
-        this.refreshViews();
+
     }
 
     public static updateTheme(index: number) {

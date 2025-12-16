@@ -1,18 +1,21 @@
-import {inject, InjectionKey, provide, Ref, ref} from "vue";
+import {computed, inject, InjectionKey, provide, Ref, ref} from "vue";
 import {GameStateModel} from "../models/game-state.model";
 import {defaultGameState} from "../constants/default-game-state.constant";
 import {getGameState} from "../services/game.service";
 import {joinRoomSocketOnly, setupSocketsOnly} from "../utils/socket.util";
+import {RtcService, setupRtcService} from "../services/rtc.service";
+import {ElementTileGroupModel} from "../models/element-tile-group.model";
+import {TileStateModel} from "../models/tile-state.model";
 
 interface AppContextValue {
     gameState: Ref<GameStateModel>;
     selectedElementIndex: Ref<number | null>;
     hoverTileIndex: Ref<number | null>;
     numberOfElements: Ref<number>;
-    setSelectedElementIndex: (index: number | null) => void;
     refreshState: () => Promise<void>;
     updateTheme: (index: number) => void;
     isGameOver: Ref<boolean>;
+    rtcService: RtcService;
 }
 
 const key = Symbol() as InjectionKey<AppContextValue>;
@@ -32,21 +35,20 @@ export const provideAppContext = () => {
     const selectedElementIndex: Ref<number | null> = ref(null);
     const hoverTileIndex: Ref<number | null> = ref(null);
     const numberOfElements: Ref<number> = ref(3);
-    const isGameOver: Ref<boolean> = ref(false);
 
     const updateState = (newState: GameStateModel) => {
         if (gameState.value.sessionId !== newState.sessionId) {
-            joinRoomSocketOnly(socket, newState.sessionId);
+            joinRoomSocketOnly(socket, newState.sessionId, rtcService.handleJoinRoom);
         }
+        hoverTileIndex.value = null;
+        selectedElementIndex.value = null;
 
         gameState.value = newState;
     }
 
     const socket = setupSocketsOnly(updateState);
 
-    const setSelectedElementIndex = (index: number | null) => {
-        selectedElementIndex.value = index;
-    }
+    const rtcService = setupRtcService(socket, gameState, hoverTileIndex, selectedElementIndex);
 
     const refreshState = async () => {
         const newState = await getGameState();
@@ -57,6 +59,25 @@ export const provideAppContext = () => {
         }
 
         updateState(newState);
+    }
+
+    const isGameOver: Ref<boolean> = computed(() => {
+        const elementgroups = Object.entries(gameState.value.universalGridPreview.elementTileGroups).slice(0, numberOfElements.value);
+        const elements = gameState.value.elements?.map(el => el.structure.length).slice(0, numberOfElements.value);
+        if(!elements) {
+            return false;
+        }
+        return !elementgroups.some(([key, group]) => hasGroupValidPlacements(group, elements[Number(key)] ));
+    });
+
+    const hasGroupValidPlacements = (group: ElementTileGroupModel, elementLength: number) => {
+        for (const tiles of Object.values(group)) {
+            if (tiles.length === elementLength &&
+                !tiles.some( tile => tile.state.state === TileStateModel.BLOCKED )) {
+                return true;
+            }
+        }
+        return false;
     }
 
     const updateTheme = (index: number) => {
@@ -71,10 +92,10 @@ export const provideAppContext = () => {
         selectedElementIndex,
         hoverTileIndex,
         numberOfElements,
-        setSelectedElementIndex,
         refreshState,
         updateTheme,
         isGameOver,
+        rtcService
     }
 
     provide(key, context);

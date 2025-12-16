@@ -5,6 +5,7 @@ import {getPreviewUrl} from "../utils/render.util";
 import {placeElement} from "../services/game.service";
 import {GridModel} from "../models/grid.model";
 import {ElementTileGroupModel} from "../models/element-tile-group.model";
+import {MouseGridPosition, mouseGridPositionType} from "../models/rtc-models.model";
 
 export interface PreviewTileProps {
     grid: GridModel;
@@ -37,7 +38,7 @@ const usePreviewTile = (props: PreviewTileProps) => {
 
         await placeElement(app.selectedElementIndex.value, tileInfo.value.index);
 
-        app.setSelectedElementIndex(null);
+        app.selectedElementIndex.value = null;
         void app.refreshState();
     }
 
@@ -48,6 +49,7 @@ const usePreviewTile = (props: PreviewTileProps) => {
         if (index === hoverTileIndex) return;
 
         app.hoverTileIndex.value = index;
+        publishMouseEnter(index);
     }
 
     const handleMouseLeave = () => {
@@ -57,6 +59,14 @@ const usePreviewTile = (props: PreviewTileProps) => {
         if (index !== hoverTileIndex) return;
 
         app.hoverTileIndex.value = index;
+        publishMouseEnter(null);
+    }
+
+    const publishMouseEnter = (index: number | null) => {
+        const msg: MouseGridPosition = {
+            hoverTileIndex: index
+        }
+        app.rtcService.publishDataToPeers({ type: mouseGridPositionType, payload: msg })
     }
 
     return {

@@ -1,8 +1,6 @@
 import {ElementModel} from "../models/element.model";
 import '../scss/styles.scss';
 import AppState from "../app-state";
-import {publishDataToPeers} from "./rtc.util";
-import {ElementSelection, elementSelectionType} from "../models/rtc-models.model";
 
 export const getElementDimensions = (element: ElementModel) => {
     const xMin = Math.min(...element.structure.map(element => element.xPos));
@@ -23,12 +21,4 @@ export const hasPoint = (
 
 export const handleElementClick = (index: number) => {
     AppState.setSelectedElement(index);
-    publishElementSelection(index);
-}
-
-export const publishElementSelection = (index: number) => {
-    const msg : ElementSelection = {
-        elementIndex: index,
-    };
-    publishDataToPeers({type: elementSelectionType, payload: msg});
 }
