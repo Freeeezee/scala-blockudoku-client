@@ -7,5 +7,5 @@ export const main = async () => {
 
     await handleQueryParams();
 
-    initializeBootstrapTooltips();
+    //initializeBootstrapTooltips();
 }
