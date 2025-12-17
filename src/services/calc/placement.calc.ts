@@ -3,7 +3,6 @@ import {TileModel} from "../../models/tile.model";
 import {TileStateModel} from "../../models/tile-state.model";
 import {GridModel} from "../../models/grid.model";
 import {generateElement} from "../../utils/element-generation.util";
-import {createUniversalGridPreview} from "../../utils/universal-grid-preview-generation.util";
 
 export const calcPlacement = async (
     elementIndex: number,
@@ -27,7 +26,6 @@ export const calcPlacement = async (
     const elements = gameState.elements.map((element, index) => (
         index === elementIndex ? newElement : element
     ));
-
 
     return {
         ...gameState,
