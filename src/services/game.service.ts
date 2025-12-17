@@ -1,6 +1,5 @@
 import {get, post} from "../utils/service.util";
 import {GameStateModel} from "../models/game-state.model";
-import {injectAppContext} from "../contexts/app.context";
 
 export const getGameState = async () => {
     return get<GameStateModel>('/');

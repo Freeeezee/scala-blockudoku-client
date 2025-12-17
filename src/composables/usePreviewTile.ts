@@ -40,7 +40,7 @@ const usePreviewTile = (props: PreviewTileProps) => {
         const elementIndex = app.selectedElementIndex.value;
         const tileIndex = tileInfo.value.index;
 
-        const newPlacementHistory = app.gameState.value.placementHistory ?? [];
+        const newPlacementHistory = app.gameState.value.placementHistory;
         newPlacementHistory.push({
             placementIndex: newPlacementHistory.length,
             tileIndex,
