@@ -2,9 +2,11 @@ import {createApp} from "vue";
 import App from "../components/App.vue";
 import 'vuetify/styles'
 import {createVuetify} from 'vuetify'
+import {registerHtmlInterceptor} from "../services/offline-server.service";
 
 export const initializeApp = () => {
     initializeServiceWorker();
+    registerHtmlInterceptor();
 
     const vuetify = createVuetify();
 

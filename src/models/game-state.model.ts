@@ -9,4 +9,5 @@ export interface GameStateModel {
     colorIndex: number;
     universalGridPreview: UniversalGridPreviewModel;
     sessionId: string;
+    placementHistory: PlacementHistoryModel[];
 }

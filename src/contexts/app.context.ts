@@ -16,6 +16,7 @@ interface AppContextValue {
     updateTheme: (index: number) => void;
     isGameOver: Ref<boolean>;
     rtcService: RtcService;
+    isConnected: Ref<boolean>;
 }
 
 const key = Symbol() as InjectionKey<AppContextValue>;
@@ -35,6 +36,7 @@ export const provideAppContext = () => {
     const selectedElementIndex: Ref<number | null> = ref(null);
     const hoverTileIndex: Ref<number | null> = ref(null);
     const numberOfElements: Ref<number> = ref(3);
+    const isConnected = ref(false);
 
     const updateState = (newState: GameStateModel) => {
         if (gameState.value.sessionId !== newState.sessionId) {
@@ -95,7 +97,8 @@ export const provideAppContext = () => {
         refreshState,
         updateTheme,
         isGameOver,
-        rtcService
+        rtcService,
+        isConnected
     }
 
     provide(key, context);
