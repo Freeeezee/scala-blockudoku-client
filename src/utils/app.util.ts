@@ -6,7 +6,7 @@ import {registerHtmlInterceptor} from "../services/offline-server.service";
 
 export const initializeApp = () => {
     initializeServiceWorker();
-    registerHtmlInterceptor();
+    //registerHtmlInterceptor();
 
     const vuetify = createVuetify();
 

@@ -1,4 +1,4 @@
-import {computed, inject, InjectionKey, provide, Ref, ref} from "vue";
+import {computed, ComputedRef, inject, InjectionKey, provide, Ref, ref} from "vue";
 import {GameStateModel} from "../models/game-state.model";
 import {defaultGameState} from "../constants/default-game-state.constant";
 import {getGameState} from "../services/game.service";
@@ -12,9 +12,9 @@ interface AppContextValue {
     selectedElementIndex: Ref<number | null>;
     hoverTileIndex: Ref<number | null>;
     numberOfElements: Ref<number>;
-    refreshState: () => Promise<void>;
+    refreshState: (gameState?: GameStateModel) => Promise<void>;
     updateTheme: (index: number) => void;
-    isGameOver: Ref<boolean>;
+    isGameOver: ComputedRef<boolean>;
     rtcService: RtcService;
     isConnected: Ref<boolean>;
 }
@@ -52,8 +52,8 @@ export const provideAppContext = () => {
 
     const rtcService = setupRtcService(socket, gameState, hoverTileIndex, selectedElementIndex);
 
-    const refreshState = async () => {
-        const newState = await getGameState();
+    const refreshState = async (gameState?: GameStateModel) => {
+        const newState = gameState ?? await getGameState();
 
         if (!newState) {
             console.error('Unable to load game state');
@@ -63,12 +63,19 @@ export const provideAppContext = () => {
         updateState(newState);
     }
 
-    const isGameOver: Ref<boolean> = computed(() => {
-        const elementgroups = Object.entries(gameState.value.universalGridPreview.elementTileGroups).slice(0, numberOfElements.value);
-        const elements = gameState.value.elements?.map(el => el.structure.length).slice(0, numberOfElements.value);
+    const isGameOver = computed(() => {
+        const elementgroups = Object.entries(
+            gameState.value.universalGridPreview.elementTileGroups
+        ).slice(0, numberOfElements.value);
+
+        const elements = gameState.value.elements
+            ?.map(el => el.structure.length)
+            .slice(0, numberOfElements.value);
+
         if(!elements) {
             return false;
         }
+
         return !elementgroups.some(([key, group]) => hasGroupValidPlacements(group, elements[Number(key)] ));
     });
 

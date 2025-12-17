@@ -1,0 +1,1 @@
+export type ProbabilityListModel<TItem> = { item: TItem, weight: number }[];

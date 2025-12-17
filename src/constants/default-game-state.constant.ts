@@ -15,4 +15,5 @@ export const defaultGameState: GameStateModel = {
         }
     },
     sessionId: '',
+    placementHistory: []
 }

@@ -18,5 +18,3 @@ export const registerHtmlInterceptor = () => {
         }
     );
 }
-
-export const tryUpdateGameState = async

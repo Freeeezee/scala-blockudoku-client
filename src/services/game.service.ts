@@ -2,19 +2,12 @@ import {get, post} from "../utils/service.util";
 import {GameStateModel} from "../models/game-state.model";
 import {injectAppContext} from "../contexts/app.context";
 
-const app = injectAppContext();
-
 export const getGameState = async () => {
-     get<GameStateModel>('/');
-    return app.gameState.value;
+    return get<GameStateModel>('/');
 }
 
-export const placeElement = async (elementIndex: number, tileIndex: number) => {
-
-    return await post(`/place`, {
-        elementIndex,
-        positionIndex: tileIndex,
-    });
+export const placeElement = async (placementHistory: PlacementHistoryModel[]) => {
+    return await post<GameStateModel>(`/place`, placementHistory);
 }
 
 export const resetGame = async () => {

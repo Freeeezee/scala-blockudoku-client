@@ -6,6 +6,7 @@ import {placeElement} from "../services/game.service";
 import {GridModel} from "../models/grid.model";
 import {ElementTileGroupModel} from "../models/element-tile-group.model";
 import {MouseGridPosition, mouseGridPositionType} from "../models/rtc-models.model";
+import {calcPlacement} from "../services/calc/placement.calc";
 
 export interface PreviewTileProps {
     grid: GridModel;
@@ -36,10 +37,34 @@ const usePreviewTile = (props: PreviewTileProps) => {
     const handleClick = async () => {
         if (app.selectedElementIndex.value === null) return;
 
-        await placeElement(app.selectedElementIndex.value, tileInfo.value.index);
+        const elementIndex = app.selectedElementIndex.value;
+        const tileIndex = tileInfo.value.index;
+
+        const newPlacementHistory = app.gameState.value.placementHistory ?? [];
+        newPlacementHistory.push({
+            placementIndex: newPlacementHistory.length,
+            tileIndex,
+            elementIndex,
+        });
+
+        const calculatedState = await calcPlacement(
+            elementIndex,
+            tileIndex,
+            newPlacementHistory,
+            app.gameState.value
+        );
 
         app.selectedElementIndex.value = null;
-        void app.refreshState();
+
+        void app.refreshState(calculatedState);
+
+        console.log(calculatedState);
+
+        const apiState = await placeElement(newPlacementHistory);
+
+        if (!apiState) return;
+
+        void app.refreshState(apiState);
     }
 
     const handleMouseEnter = () => {

@@ -25,5 +25,7 @@ export const getPreviewState = (
             return 'preview-invalid';
         case TileStateModel.EMPTY:
             return 'preview-valid';
+        default:
+            return 'none'
     }
 }
