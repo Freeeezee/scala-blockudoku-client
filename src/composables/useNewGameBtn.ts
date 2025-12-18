@@ -10,7 +10,6 @@ const useNewGameBtn = () => {
         app.selectedElementIndex.value = null;
         const newState = await calcNewGameState(app.gameState.value.sessionId);
         void app.refreshState(newState);
-        void app.refreshState();
     }
 
     const newGame = async () => {

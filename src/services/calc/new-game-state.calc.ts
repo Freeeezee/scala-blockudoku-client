@@ -8,9 +8,10 @@ import {PCG32Random} from "../../utils/pcg32.util";
 import {generateSeed} from "../../utils/seed-generation.util";
 
 export const calcNewGameState = async (sessionId: string): Promise<GameStateModel> => {
-    const newGameState = {
+    const newGameState: GameStateModel = {
         ...defaultGameState,
-        sessionId: sessionId
+        sessionId: sessionId,
+        placementHistory: []
     };
 
     const random = PCG32Random.create(await generateSeed(newGameState.grid, sessionId));
