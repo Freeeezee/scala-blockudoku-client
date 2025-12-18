@@ -58,8 +58,6 @@ const usePreviewTile = (props: PreviewTileProps) => {
 
         void app.refreshState(calculatedState);
 
-        console.log(calculatedState);
-
         const apiState = await placeElement(newPlacementHistory);
 
         if (!apiState) return;

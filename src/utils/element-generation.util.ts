@@ -15,10 +15,11 @@ export const generateElement = async (
 
     const points: PointModel[] = [{xPos: 0, yPos: 0}];
     const length = getRandomItem(elementProbabilityList, random.nextFloat());
+
     const randomColor = random.nextIntMax(5);
 
     for (let i = 0; i < length; i++) {
-        points.push(generateNextPoint(points, random));
+        points.unshift(generateNextPoint(points, random));
     }
 
     return {
