@@ -65,6 +65,6 @@ const getElementTilesForPosition = (
         if (x < 0 || x >= grid.xLength || y < 0 || y >= grid.yLength) {
             return;
         }
-        return grid.tiles[x * grid.yLength + y];
+        return grid.tiles[x + y * grid.xLength];
     }).filter((tile): tile is TileModel => !!tile);
 }
