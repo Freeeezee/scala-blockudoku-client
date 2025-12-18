@@ -53,20 +53,20 @@ export const provideAppContext = () => {
 
     const rtcService = setupRtcService(socket, gameState, hoverTileIndex, selectedElementIndex);
 
-    const refreshState = async (gameState?: GameStateModel) => {
-        const newState = gameState ?? await getGameState();
+    const refreshState = async (updatedGameState?: GameStateModel) => {
+        const newState = updatedGameState ?? await getGameState();
 
         if (!newState) {
             console.error('Unable to load game state');
             return;
         }
 
-        if(newState.colorIndex !== gameState?.colorIndex) {
-           setColor(gameState?.colorIndex ?? 0);
+        if(newState.colorIndex !== gameState.value?.colorIndex) {
+           setColor(gameState.value?.colorIndex ?? 0);
         }
 
         updateState({...newState,
-            colorIndex: gameState?.colorIndex ?? 0
+            colorIndex: gameState.value?.colorIndex ?? 0
         });
     }
 
