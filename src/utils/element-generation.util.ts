@@ -9,9 +9,10 @@ import {elementProbabilityList} from "../constants/element-probability-list.cons
 export const generateElement = async (
     slot: number,
     grid: GridModel,
-    sessionId: string
+    sessionId: string,
+    randomGen: PCG32Random | null = null,
 ): Promise<ElementModel> => {
-    const random = PCG32Random.create(await generateSeed(grid, sessionId));
+    const random = randomGen ?? PCG32Random.create(await generateSeed(grid, sessionId));
 
     const points: PointModel[] = [{xPos: 0, yPos: 0}];
     const length = getRandomItem(elementProbabilityList, random.nextFloat());
