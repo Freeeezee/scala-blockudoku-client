@@ -3,9 +3,7 @@ import {TileModel} from "../../models/tile.model";
 import {TileStateModel} from "../../models/tile-state.model";
 import {GridModel} from "../../models/grid.model";
 import {generateElement} from "../../utils/element-generation.util";
-import {
-    generateUniversalGridPreview
-} from "../../utils/element-tile-group-generator.util";
+import {generateUniversalGridPreview} from "../../utils/element-tile-group-generator.util";
 
 export const calcPlacement = async (
     elementIndex: number,
@@ -15,13 +13,18 @@ export const calcPlacement = async (
 ): Promise<GameStateModel> => {
     if (!gameState.grid || !gameState.elements) return gameState;
 
+    const element = gameState.elements[elementIndex];
+
     const affectedTiles = getAffectedTiles(elementIndex, tileIndex, gameState);
 
-    if (affectedTiles.some(tile => tile.state.state === TileStateModel.BLOCKED)) return gameState;
+    const hasBlocked = affectedTiles.some(tile => tile.state.state === TileStateModel.BLOCKED);
+    const isNotFullElement = affectedTiles.length !== element.structure.length;
+
+    if (hasBlocked || isNotFullElement) return gameState;
 
     const newGrid: GridModel = {
         ...gameState.grid,
-        tiles: updateTileState(affectedTiles, gameState.grid.tiles),
+        tiles: updateTileState(affectedTiles, gameState.grid.tiles, element.colors),
     }
 
     const newElement = await generateElement(elementIndex, newGrid, gameState.sessionId);
@@ -55,7 +58,8 @@ const getAffectedTiles = (
 
 const updateTileState = (
     affectedTiles: TileModel[],
-    allTiles: TileModel[]
+    allTiles: TileModel[],
+    colors: number,
 ): TileModel[] => {
     return allTiles.map(tile => {
         const affected = affectedTiles.find(af => af.index === tile.index);
@@ -65,7 +69,7 @@ const updateTileState = (
         return {
             ...tile,
             state: { state: TileStateModel.BLOCKED },
-            colors: affected.colors,
+            colors,
         }
     });
 }
