@@ -6,7 +6,6 @@ import {generateElement} from "../../utils/element-generation.util";
 import {
     generateUniversalGridPreview
 } from "../../utils/element-tile-group-generator.util";
-import {ElementTileGroupModel} from "../../models/element-tile-group.model";
 
 export const calcPlacement = async (
     elementIndex: number,
