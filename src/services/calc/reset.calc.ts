@@ -8,17 +8,18 @@ import {
     generateUniversalGridPreview
 } from "../../utils/element-tile-group-generator.util";
 
-export const calcReset = (): Promise<GameStateModel> => {
+export const calcReset = async (): Promise<GameStateModel> => {
     const newGameState = {
         ...defaultGameState,
         sessionId: uuidv4()
     };
 
-    const newElements = Array.from({ length: 9 }, (_, index) =>
+    const newElements = await Promise.all(Array.from({ length: 9 }, (_, index) =>
         generateElement(index, newGameState.grid, newGameState.sessionId)
-    );
+    ));
 
-    const universalGridPreview = generateCompleteUniversalGridPreview(elementIndex,
+    const universalGridPreview = generateCompleteUniversalGridPreview(
+        elementIndex,
         newElement,
         newGrid,
         gameState);
