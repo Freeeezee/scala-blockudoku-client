@@ -6,6 +6,7 @@ import {joinRoomSocketOnly, setupSocketsOnly} from "../utils/socket.util";
 import {RtcService, setupRtcService} from "../services/rtc.service";
 import {ElementTileGroupModel} from "../models/element-tile-group.model";
 import {TileStateModel} from "../models/tile-state.model";
+import {setColor} from "../services/settings.service";
 
 interface AppContextValue {
     gameState: Ref<GameStateModel>;
@@ -60,7 +61,13 @@ export const provideAppContext = () => {
             return;
         }
 
-        updateState(newState);
+        if(newState.colorIndex !== gameState?.colorIndex) {
+           setColor(gameState?.colorIndex ?? 0);
+        }
+
+        updateState({...newState,
+            colorIndex: gameState?.colorIndex ?? 0
+        });
     }
 
     const isGameOver = computed(() => {
