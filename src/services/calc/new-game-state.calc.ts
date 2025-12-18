@@ -4,6 +4,8 @@ import {generateElement} from "../../utils/element-generation.util";
 import {
     generateCompleteUniversalGridPreview
 } from "../../utils/element-tile-group-generator.util";
+import {PCG32Random} from "../../utils/pcg32.util";
+import {generateSeed} from "../../utils/seed-generation.util";
 
 export const calcNewGameState = async (sessionId: string): Promise<GameStateModel> => {
     const newGameState = {
@@ -11,8 +13,10 @@ export const calcNewGameState = async (sessionId: string): Promise<GameStateMode
         sessionId: sessionId
     };
 
+    const random = PCG32Random.create(await generateSeed(newGameState.grid, sessionId));
+
     const newElements = await Promise.all(Array.from({ length: 9 }, (_, index) =>
-        generateElement(index, newGameState.grid, newGameState.sessionId)
+        generateElement(index, newGameState.grid, newGameState.sessionId, random)
     ));
 
     const universalGridPreview = generateCompleteUniversalGridPreview(
