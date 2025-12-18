@@ -1,17 +1,14 @@
 import {GameStateModel} from "../../models/game-state.model";
-import {get} from "../../utils/service.util";
 import {defaultGameState} from "../../constants/default-game-state.constant";
 import {generateElement} from "../../utils/element-generation.util";
-import { v4 as uuidv4 } from 'uuid';
 import {
-    generateCompleteUniversalGridPreview,
-    generateUniversalGridPreview
+    generateCompleteUniversalGridPreview
 } from "../../utils/element-tile-group-generator.util";
 
-export const calcReset = async (): Promise<GameStateModel> => {
+export const calcNewGameState = async (sessionId: string): Promise<GameStateModel> => {
     const newGameState = {
         ...defaultGameState,
-        sessionId: uuidv4()
+        sessionId: sessionId
     };
 
     const newElements = await Promise.all(Array.from({ length: 9 }, (_, index) =>
@@ -19,10 +16,14 @@ export const calcReset = async (): Promise<GameStateModel> => {
     ));
 
     const universalGridPreview = generateCompleteUniversalGridPreview(
-        elementIndex,
-        newElement,
-        newGrid,
-        gameState);
+        newElements,
+        newGameState.grid,
+        newGameState);
 
-    return await get(`/reset`);
+    return {
+        ...newGameState,
+        elements: newElements,
+        universalGridPreview
+    };
+
 }

@@ -25,22 +25,17 @@ export const generateUniversalGridPreview = (
 }
 
 export const generateCompleteUniversalGridPreview = (
-    elementIndex: number,
     newElements: ElementModel[],
     newGrid: GridModel,
     gameState: GameStateModel) => {
-    const newElementTileGroup = generateElementTileGroup(newElement, newGrid);
+
+    const newElementTileGroups = newElements.map(element =>
+        generateElementTileGroup(element, newGrid)
+    );
 
     return {
         ...gameState.universalGridPreview,
-        elementTileGroups: Object.fromEntries(
-            Object.entries(gameState.universalGridPreview.elementTileGroups).map(
-                ([key, group]) =>
-                    Number(key) === elementIndex
-                        ? [Number(key), newElementTileGroup]
-                        : [Number(key), group]
-            )
-        ) as { [key: number]: ElementTileGroupModel }
+        elementTileGroups: newElementTileGroups
     };
 }
 

@@ -15,8 +15,15 @@ export const defaultGameState: GameStateModel = {
             0: defaultElementTileGroup,
             1: defaultElementTileGroup,
             2: defaultElementTileGroup,
+            3: defaultElementTileGroup,
+            4: defaultElementTileGroup,
+            5: defaultElementTileGroup,
+            6: defaultElementTileGroup,
+            7: defaultElementTileGroup,
+            8: defaultElementTileGroup,
+            9: defaultElementTileGroup,
         }
     },
-    sessionId: uuidv4(),
+    sessionId: '',
     placementHistory: []
 }

@@ -1,8 +1,9 @@
 import {TileStateModel} from "../models/tile-state.model";
+import {defaultXLength, defaultYLength} from "./default-length.constant";
 
 export const defaultGrid = {
-    xLength: 9,
-    yLength: 9,
+    xLength: defaultXLength,
+    yLength: defaultYLength,
     tiles: Array.from({ length: 9 * 9 }, (_, index) => ({
         index,
         position: {

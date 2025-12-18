@@ -10,5 +10,5 @@ export const placeElement = async (placementHistory: PlacementHistoryModel[]) =>
 }
 
 export const resetGame = async () => {
-
+    return await get(`/reset`);
 }
