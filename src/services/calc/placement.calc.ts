@@ -3,7 +3,9 @@ import {TileModel} from "../../models/tile.model";
 import {TileStateModel} from "../../models/tile-state.model";
 import {GridModel} from "../../models/grid.model";
 import {generateElement} from "../../utils/element-generation.util";
-import {generateElementTileGroup} from "../../utils/element-tile-group-generator.util";
+import {
+    generateUniversalGridPreview
+} from "../../utils/element-tile-group-generator.util";
 import {ElementTileGroupModel} from "../../models/element-tile-group.model";
 
 export const calcPlacement = async (
@@ -29,19 +31,10 @@ export const calcPlacement = async (
         index === elementIndex ? newElement : element
     ));
 
-    const newElementTileGroup = generateElementTileGroup(newElement, newGrid);
-
-    const universalGridPreview = {
-        ...gameState.universalGridPreview,
-        elementTileGroups: Object.fromEntries(
-            Object.entries(gameState.universalGridPreview.elementTileGroups).map(
-                ([key, group]) =>
-                    Number(key) === elementIndex
-                        ? [Number(key), newElementTileGroup]
-                        : [Number(key), group]
-            )
-        ) as { [key: number]: ElementTileGroupModel }
-    };
+    const universalGridPreview = generateUniversalGridPreview(elementIndex,
+        newElement,
+        newGrid,
+        gameState);
 
     return {
         ...gameState,
