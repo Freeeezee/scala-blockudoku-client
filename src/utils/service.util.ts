@@ -22,9 +22,10 @@ export const get = async <T> (url: string): Promise<T | null> => {
     }
 }
 
-export const post = async <T> (url: string, data: any): Promise<T | null> => {
+export const post = async <T> (url: string, data: any, header?: any): Promise<T | null> => {
+    const axiosConfig = {headers: {header}};
     try {
-        const response = await instance.post<T>(url, data);
+        const response = await instance.post<T>(url, data, axiosConfig);
 
         if (response.status !== 200) {
             return null;

@@ -6,6 +6,7 @@ import Settings from "./settings/Settings.vue";
 import Elements from "./elements/Elements.vue";
 import NewGameBtn from "./NewGameBtn.vue";
 import GameOverView from "./settings/GameOverView.vue";
+import Profile from "./profile/Profile.vue";
 </script>
 
 <template>
@@ -16,6 +17,7 @@ import GameOverView from "./settings/GameOverView.vue";
         <Elements />
         <Settings />
       <NewGameBtn />
+      <Profile />
       <GameOverView />
     </div>
 </template>

@@ -1,3 +1,3 @@
-interface UserInfoModel {
+export interface UserInfoModel {
     username: string;
 }

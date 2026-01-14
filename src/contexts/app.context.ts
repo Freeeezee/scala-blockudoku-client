@@ -1,4 +1,4 @@
-import {computed, ComputedRef, inject, InjectionKey, provide, Ref, ref} from "vue";
+import {computed, ComputedRef, inject, InjectionKey, onMounted, provide, Ref, ref} from "vue";
 import {GameStateModel} from "../models/game-state.model";
 import {defaultGameState} from "../constants/default-game-state.constant";
 import {getGameState} from "../services/game.service";
@@ -7,9 +7,11 @@ import {RtcService, setupRtcService} from "../services/rtc.service";
 import {ElementTileGroupModel} from "../models/element-tile-group.model";
 import {TileStateModel} from "../models/tile-state.model";
 import {setColor} from "../services/settings.service";
+import {getUserInfo} from "../services/user.service";
 
 interface AppContextValue {
     gameState: Ref<GameStateModel>;
+    loggedInUsername: Ref<string | null>;
     selectedElementIndex: Ref<number | null>;
     hoverTileIndex: Ref<number | null>;
     numberOfElements: Ref<number>;
@@ -34,10 +36,17 @@ export const injectAppContext = () => {
 
 export const provideAppContext = () => {
     const gameState: Ref<GameStateModel> = ref(defaultGameState);
+    const loggedInUsername: Ref<string | null> = ref(null);
     const selectedElementIndex: Ref<number | null> = ref(null);
     const hoverTileIndex: Ref<number | null> = ref(null);
     const numberOfElements: Ref<number> = ref(3);
     const isConnected = ref(false);
+
+    const updateLoggedInUsername = async () => {
+        loggedInUsername.value = (await getUserInfo())?.username ?? null;
+    }
+
+    onMounted(updateLoggedInUsername)
 
     const updateState = (newState: GameStateModel) => {
         if (gameState.value.sessionId !== newState.sessionId) {
@@ -105,6 +114,7 @@ export const provideAppContext = () => {
 
     const context = {
         gameState,
+        loggedInUsername,
         selectedElementIndex,
         hoverTileIndex,
         numberOfElements,
