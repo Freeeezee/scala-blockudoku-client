@@ -18,3 +18,7 @@ export const loginUser = async (username: string, password: string) => {
         `username=${username}&password=${password}`,
         {'Content-Type': 'application/x-www-form-urlencoded'});
 }
+
+export const logoutUser = async () => {
+    return await get('/logout');
+}

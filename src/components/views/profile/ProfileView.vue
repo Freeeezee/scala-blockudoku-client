@@ -4,6 +4,7 @@ import {useProfileView} from "../../../composables/useProfileView";
 const {
   username,
   highscore,
+  logout
 } = useProfileView();
 </script>
 
@@ -13,6 +14,7 @@ const {
     <v-spacer/>
   </v-card-title>
   <p>{{ highscore }}</p>
+  <v-btn color="#0099cc" class="mb-2" @click="logout">Logout</v-btn>
 </template>
 
 <style scoped>
