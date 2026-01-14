@@ -2,6 +2,8 @@ import {computed, ref} from "vue";
 import {loginUser, registerUser} from "../services/user.service";
 import {injectAppContext} from "../contexts/app.context";
 
+const API_URL = process.env.API_URL;
+
 export const useAuthenticate = () => {
     const app = injectAppContext();
     const activeTab = ref(0);
@@ -26,6 +28,14 @@ export const useAuthenticate = () => {
         app.loggedInUsername.value = username.value;
     }
 
+    const loginWithGoogle = () => {
+        window.location.href = `${API_URL}/auth/google`;
+    }
+
+    const loginWithGithub = () => {
+        window.location.href = `${API_URL}/auth/github`;
+    }
+
     const canSubmit = computed(() => (username.value.trim() !== "" && password.value.trim() !== ""));
 
     return {
@@ -34,6 +44,8 @@ export const useAuthenticate = () => {
         password,
         register,
         login,
+        loginWithGoogle,
+        loginWithGithub,
         canSubmit,
     }
 }

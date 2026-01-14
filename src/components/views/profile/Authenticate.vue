@@ -7,6 +7,8 @@ const {
   password,
   register,
   login,
+  loginWithGoogle,
+  loginWithGithub,
   canSubmit,
 } = useAuthenticate();
 </script>
@@ -37,6 +39,21 @@ const {
       </v-form>
     </v-tabs-window-item>
   </v-tabs-window>
+
+  <v-btn
+      color="#0099cc"
+      class="mb-2 mx-6"
+      @click="loginWithGoogle"
+  >
+    Login with Google
+  </v-btn>
+  <v-btn
+      color="#0099cc"
+      class="mb-6 mx-6"
+      @click="loginWithGithub"
+  >
+    Login with Github
+  </v-btn>
 </template>
 
 <style scoped>
