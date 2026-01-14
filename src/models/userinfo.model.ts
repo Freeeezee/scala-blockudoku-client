@@ -1,0 +1,3 @@
+interface UserInfoModel {
+    username: string;
+}
