@@ -1,5 +1,5 @@
 import {injectAppContext} from "../contexts/app.context";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import {getHighscore} from "../services/user.service";
 
 export const useProfileView = () => {
@@ -22,6 +22,10 @@ export const useProfileView = () => {
     );
 
     onMounted(refreshHighscore);
+
+    watch(app.loggedInUsername, () => {
+        void refreshHighscore();
+    });
 
     return {
         username,

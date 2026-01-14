@@ -1,4 +1,4 @@
-import {get, post} from "../utils/service.util";
+import {get, instance, post} from "../utils/service.util";
 import {UserInfoModel} from '../models/userinfo.model';
 
 export const getHighscore = async () => {
@@ -10,7 +10,14 @@ export const getUserInfo = async () => {
 }
 
 export const registerUser = async (username: string, password: string) => {
-    return await post('/register', {username, password});
+    try {
+        const response = await instance.post('/register', {username, password});
+
+        return response.status === 201;
+    }
+    catch (error) {
+        return false;
+    }
 }
 
 export const loginUser = async (username: string, password: string) => {
