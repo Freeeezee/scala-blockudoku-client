@@ -40,13 +40,13 @@ const {
     </v-tabs-window-item>
   </v-tabs-window>
 
-  <v-btn
+<!--  <v-btn
       color="#0099cc"
       class="mb-2 mx-6"
       @click="loginWithGoogle"
   >
     Login with Google
-  </v-btn>
+  </v-btn>-->
   <v-btn
       color="#0099cc"
       class="mb-6 mx-6"
