@@ -1,4 +1,4 @@
-import {ref} from 'vue';
+import {computed, ref} from 'vue';
 import {injectAppContext} from "../contexts/app.context";
 import {setColor} from "../services/settings.service";
 import {makeSessionUrl} from "../utils/session.util";
@@ -13,7 +13,7 @@ const useSettings= () => {
         app.gameState.value.colorIndex = index;
     };
 
-    const url = makeSessionUrl(app.gameState.value.sessionId);
+    const url = computed(() => makeSessionUrl(app.gameState.value.sessionId));
 
     const handleCopyMultiplayerClick = async () => {
         if (globalThis.isSecureContext) {
@@ -23,7 +23,7 @@ const useSettings= () => {
             return;
         }
         try {
-            await navigator.clipboard.writeText(url);
+            await navigator.clipboard.writeText(url.value);
         } catch (err) {
             console.error('Failed to copy: ', err);
         }
